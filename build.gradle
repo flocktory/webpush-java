@@ -1,5 +1,5 @@
-group 'nl.martijndwars'
-version '1.0.0'
+group 'com.flocktory'
+version '1.0.1'
 
 apply plugin: 'java'
 apply plugin: 'maven'
@@ -10,7 +10,7 @@ targetCompatibility = 1.8
 
 jar {
     baseName = 'web-push'
-    version = '1.0.0'
+    version = '1.0.1'
 }
 
 task javadocJar(type: Jar) {
@@ -40,8 +40,7 @@ uploadArchives {
     mavenDeployer {
       beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
 
-      repository(url: "https://oss.sonatype.org/service/local/staging/deploy/maven2/") {
-        authentication(userName: hasProperty('ossrhUsername')?ossrhUsername:'', password: hasProperty('ossrhPassword')?ossrhPassword:'')
+      repository(url: "http://artifacts.dev.flocktory.com:8081/nexus/content/repositories/releases/") {
       }
 
       snapshotRepository(url: "https://oss.sonatype.org/content/repositories/snapshots/") {

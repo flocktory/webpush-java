@@ -24,15 +24,25 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
 public class PushService {
-    private ExecutorService threadpool = Executors.newFixedThreadPool(1);
+    private ExecutorService threadpool;
 
     private String gcmApiKey;
 
     public PushService() {
+        this(1);
+    }
+
+    public PushService(int fixedThreadPoolSize) {
+        threadpool = Executors.newFixedThreadPool(fixedThreadPoolSize);
+    }
+
+    public PushService(String gcmApiKey, int fixedThreadPoolSize ) {
+        this(fixedThreadPoolSize);
+        this.gcmApiKey = gcmApiKey;
     }
 
     public PushService(String gcmApiKey) {
-        this.gcmApiKey = gcmApiKey;
+        this(gcmApiKey, 1);
     }
 
     /**
